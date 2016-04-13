@@ -490,7 +490,7 @@ public class DefineVariablesVisitor implements VoidVisitor<Object> {
 		currentScope = n.getEnclosingScope();
 
 		if (currentScope instanceof MethodSymbol) {
-			if (n.getBody() != null) {
+			if (n.getBody() != null) {				
 				n.getBody().accept(this, arg);
 			}
 		} else {
@@ -715,6 +715,7 @@ public class DefineVariablesVisitor implements VoidVisitor<Object> {
 		currentScope = n.getEnclosingScope();
 
 		n.getCondition().accept(this, arg);
+
 		n.getThenStmt().accept(this, arg);
 		if (n.getElseStmt() != null) {
 			n.getElseStmt().accept(this, arg);
@@ -746,7 +747,7 @@ public class DefineVariablesVisitor implements VoidVisitor<Object> {
 		currentScope = n.getEnclosingScope();
 
 		n.getVariable().accept(this, arg);
-		n.getIterable().accept(this, arg);
+		n.getIterable().accept(this, arg);		
 		n.getBody().accept(this, arg);
 	}
 

@@ -695,16 +695,7 @@ public final class ScanYieldVisitor implements VoidVisitor<Object> {
     }
 
     public void visit(BreakStmt n, Object arg) {
-        
-        
-        // TODO testing 
-        throw new A2SemanticsException("Found break statement at line "+n.getBeginLine());
-        
-//        if (n.getId() != null) {
-//            
-//            
-//        }
-//        
+       
     }
 
     public void visit(ReturnStmt n, Object arg) {

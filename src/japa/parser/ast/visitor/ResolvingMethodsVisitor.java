@@ -573,7 +573,7 @@ public class ResolvingMethodsVisitor implements VoidVisitor<Object> {
 			} 
 				if (!fundTheSame)
 				{
-					throw new A2SemanticsException(n.getName() + " on line " + n.getBeginLine() + " have incorrect parameters.");
+					throw new A2SemanticsException("Method call " + n.getName() + " on line " + n.getBeginLine() + " have incorrect parameters.");
 				}	 
 				
 			}
@@ -583,7 +583,7 @@ public class ResolvingMethodsVisitor implements VoidVisitor<Object> {
 				throw new A2SemanticsException(n.getName() + " on line " + n.getBeginLine() + " is not a valid method.");
 		
 		}
-		//TODO
+
 		if (n.getYieldBlock() != null)
 		{
 			n.getYieldBlock().accept(this, arg);

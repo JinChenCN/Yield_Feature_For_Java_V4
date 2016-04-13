@@ -11,7 +11,7 @@ public class Test1 {
 		Test2 lol = new Test2();
 		lol = new Test2();
 		
-		//a = lol;
+		a = lol;
 		//a = new Test2();
 	}
 	
@@ -20,6 +20,7 @@ public class Test1 {
 	
 	public int callfoo() {
 	foo(true);
+	return 0;
 	}
 }
 	

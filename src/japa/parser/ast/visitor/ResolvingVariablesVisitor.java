@@ -318,7 +318,7 @@ public class ResolvingVariablesVisitor implements VoidVisitor<Object> {
 			}
 			
 			if (resolvedSymbol.getType() != symOfVariable.getType()) {
-				throw new A2SemanticsException("Cannot convert from " + resolvedSymbol.getName() + " to " + typeOfTarget + " on line " + line + ".");
+				throw new A2SemanticsException("Cannot convert from " + resolvedSymbol.getType().getName() + " to " + typeOfTarget + " on line " + line + ".");
 			}
 		}
 	
