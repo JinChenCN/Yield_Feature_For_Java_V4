@@ -74,7 +74,7 @@ public class ClassSymbol extends ScopedSymbol implements Type {
 			return s;	
 		
 		if (superclass != null)
-			return superclass.resolveMember(name);
+			return superclass.resolveMember(string);
 
 		// otherwise it doesn't exist
 		return null;

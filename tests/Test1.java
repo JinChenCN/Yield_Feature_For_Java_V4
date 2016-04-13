@@ -5,15 +5,20 @@ public class Test1 {
     public void setA() {
         this.a = 0;
         SubTest t = new SubTest();
-        t.b = 1;
     }
 
 
-    class SubTest {
+    class SuperCla {
+
+        int c = 0;
+    }
+
+    class SubTest extends SuperCla {
 
         int b = 0;
 
         void reset() {
+            this.c = 1;
         }
 
     }
