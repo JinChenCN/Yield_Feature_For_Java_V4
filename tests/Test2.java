@@ -1,18 +1,11 @@
-public class Test3 {
+public class Test2 {
 
-    public void a() {
-        Dog d;
-        for (int i = 0; i < 10; i++) {
-        }
-        if (true) {
-        }
+    public void foo(boolean x) {
     }
 
 
-    private void S(int i) {
+    public void bar() {
+        int b = 456;
     }
 
-
-    class Dog {
-    }
 }

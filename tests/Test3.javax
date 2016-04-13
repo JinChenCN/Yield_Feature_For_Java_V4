@@ -3,7 +3,7 @@ package se701;
 public class StudentSample {
 
 	public static void main(String[] args){ 
-		sampleMethod(t){ 
+		sampleMethod(){ 
 			//The yield block 
 			for(int j = 0; j < 20; j++) { 
 				System.out.println(j);

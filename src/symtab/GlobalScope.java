@@ -75,8 +75,6 @@ public class GlobalScope extends BaseScope {
 		print.putOverloadParams(paramsObject);
 		print.putOverloadParams(paramsVoid);
 		define(print);
-		
-		//TODO : need to define more Scopes
 	}
 	
 	@Override
