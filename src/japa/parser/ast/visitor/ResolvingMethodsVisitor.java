@@ -599,9 +599,13 @@ public class ResolvingMethodsVisitor implements VoidVisitor<Object> {
 			}
     		
     		if(expr.getClass() == NameExpr.class){
+    			Symbol nameSym = currentScope.resolve(expr.toString());
+    			 if(nameSym == null){
+ 	            	throw new A2SemanticsException(expr.toString() + " on line " + expr.getBeginLine() + " is undefined.");
+ 	            }
     			sym = (Symbol) currentScope.resolve(expr.toString()).getType();
     			 if(sym == null){
-    	            	throw new A2SemanticsException(expr.toString() + " on line " + expr.getBeginLine() + "is undefined.");
+    	            	throw new A2SemanticsException(sym.getName() + " on line " + expr.getBeginLine() + " is undefined.");
     	            }
     		} 
     		else if(expr.getClass() == IntegerLiteralExpr.class){
