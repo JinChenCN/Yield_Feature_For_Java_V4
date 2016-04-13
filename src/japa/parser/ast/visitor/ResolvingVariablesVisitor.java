@@ -219,33 +219,54 @@ public class ResolvingVariablesVisitor implements VoidVisitor<Object> {
 		}
 
 		if (expr instanceof BooleanLiteralExpr) {
-			if (typeOfTarget != "boolean") {
+			if (!typeOfTarget.equals("boolean") ) {
 				throw new A2SemanticsException("Cannot convert from boolean to " + typeOfTarget + " on line " + line + ".");
 			}
 		} else if (expr instanceof NullLiteralExpr) {
-			if (typeOfTarget == "int" || typeOfTarget == "byte" || typeOfTarget == "short" || typeOfTarget == "long"
-					|| typeOfTarget == "double" || typeOfTarget == "float" || typeOfTarget == "boolean"
-					|| typeOfTarget == "char") {
+			if (typeOfTarget.equals("int") || typeOfTarget.equals("byte") || typeOfTarget.equals("short") || typeOfTarget.equals("long")
+					|| typeOfTarget.equals("double") || typeOfTarget.equals("float") || typeOfTarget.equals("boolean")
+					|| typeOfTarget.equals("char")) {
 				throw new A2SemanticsException("Variable " + symOfVariable.getName() + " cannot be null on line " + line + ".");
 			}
 		} else if (expr instanceof CharLiteralExpr) {
-			if (typeOfTarget != "char") {
+			if (!typeOfTarget.equals("char")) {
 				throw new A2SemanticsException("Cannot convert from char to " + typeOfTarget + " on line " + line + ".");
 			}
 		} else if (expr instanceof DoubleLiteralExpr) {
-			if (typeOfTarget != "double") {
+			if (!typeOfTarget.equals("double")) {
 				throw new A2SemanticsException("Cannot convert from double to " + typeOfTarget + " on line " + line + ".");
 			}
 		} else if (expr instanceof IntegerLiteralExpr) {
-			if (typeOfTarget != "int") {
+			if (!typeOfTarget.equals("int")) {
 				throw new A2SemanticsException("Cannot convert from int to " + typeOfTarget + " on line " + line + ".");
 			}
 		} else if (expr instanceof LongLiteralExpr) {
-			if (typeOfTarget != "long") {
+			if (!typeOfTarget.equals("long")) {
 				throw new A2SemanticsException("Cannot convert from int to " + typeOfTarget + " on line " + line + ".");
 			}
-		} else if (expr instanceof StringLiteralExpr) {
-			if (typeOfTarget != "String") {
+		} else if (expr instanceof FieldAccessExpr) {
+			expr.accept(this, null);	
+			String scope = ((FieldAccessExpr)expr).getScope().toString();
+			String field = ((FieldAccessExpr)expr).getField();
+			Symbol fieldSym = null;
+			symtab.Type fieldType = null;
+			
+			if(scope.equals("this")){
+				MethodSymbol classSym = (MethodSymbol)(currentScope.getEnclosingScope());
+				fieldSym = classSym.resolveMember(field);				
+			} else {
+				Symbol fieldClassSym = currentScope.resolve(scope);
+				symtab.Type type = fieldClassSym.getType();
+				ClassSymbol classSym = (ClassSymbol)type;
+				fieldSym = classSym.resolveMember(field);
+			}
+			fieldType = fieldSym.getType();
+			if(!(fieldType.getName().equals(typeOfTarget)) ) {
+				throw new A2SemanticsException("Cannot convert from " + fieldType.getName() + " to " + typeOfTarget + " on line " + line + ".");
+			}			
+		} 
+		else if (expr instanceof StringLiteralExpr) {
+			if (!typeOfTarget.equals("String")) {
 				throw new A2SemanticsException("Cannot convert from String to " + typeOfTarget + " on line " + line + ".");
 			}
 		} else if (expr instanceof MethodCallExpr) {
@@ -260,7 +281,7 @@ public class ResolvingVariablesVisitor implements VoidVisitor<Object> {
 			if (resolvedSymbol instanceof MethodSymbol) {
 				MethodSymbol m = (MethodSymbol) resolvedSymbol;
 				String returnType = m.getReturnType().getName();
-				if (typeOfTarget != returnType) {
+				if (!typeOfTarget.equals(returnType)) {
 					throw new A2SemanticsException("Cannot convert from " + returnType + " to " + typeOfTarget + " on line " + line + ".");
 				}
 			} else {
@@ -477,6 +498,31 @@ public class ResolvingVariablesVisitor implements VoidVisitor<Object> {
 
 	@Override
 	public void visit(FieldAccessExpr n, Object arg) {
+		String scope = n.getScope().toString();
+		String field = n.getField();
+		Symbol fieldSym = null;
+		
+		if(scope.equals("this")){
+			MethodSymbol classSym = (MethodSymbol)(currentScope.getEnclosingScope());
+			fieldSym = classSym.resolveMember(field);
+			if(fieldSym == null)
+			{
+				throw new A2SemanticsException("Variable " + n.toString() + " on line " + n.getBeginLine() + " is not defined.");
+			}
+		} else {
+			Symbol fieldClassSym = currentScope.resolve(scope);
+			if(fieldClassSym == null)
+			{
+				throw new A2SemanticsException("Variable " + scope + " on line " + n.getBeginLine() + " is not defined.");
+			}
+			symtab.Type type = fieldClassSym.getType();
+			ClassSymbol targetClass = (ClassSymbol)type;
+			fieldSym = targetClass.resolveMember(field);
+			if(fieldSym == null)
+			{
+				throw new A2SemanticsException("Variable " + n.toString() + " on line " + n.getBeginLine() + " is not defined.");
+			}
+		}
 	}
 
 	@Override
@@ -552,6 +598,7 @@ public class ResolvingVariablesVisitor implements VoidVisitor<Object> {
 
 	@Override
 	public void visit(SuperExpr n, Object arg) {
+		//TODO
 	}
 
 	@Override

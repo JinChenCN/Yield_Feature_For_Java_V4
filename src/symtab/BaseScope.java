@@ -16,7 +16,7 @@ public class BaseScope implements Scope  {
 
 	@Override
 	public String getScopeName() {
-		return null;
+		return enclosingScope.getScopeName();
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class BaseScope implements Scope  {
 			throw new A2SemanticsException("\"" + name + "\"" + "(On line "
 					+ symbol.getDefinedLine() + ")"
 					+ " is already defined in scope " + getScopeName()
-					+ "! (Previously defined on line "
+					+ ". (Previously defined on line "
 					+ this.resolve(name).getDefinedLine() + ")");
 		}
 		symbols.put(name, symbol);

@@ -2,15 +2,20 @@ public class Test1 {
 
     int a = 0;
 
+    int b = 0;
+
+    String s = "";
+
     public void setA() {
-        this.a = 3;
         SubTest t = new SubTest();
+        String d = t.b;
     }
 
 
     class SuperCla {
 
         void test() {
+            int d = b;
         }
 
 
