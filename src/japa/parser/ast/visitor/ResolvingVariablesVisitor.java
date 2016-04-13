@@ -174,6 +174,13 @@ public class ResolvingVariablesVisitor implements VoidVisitor<Object> {
 
 	@Override
 	public void visit(FieldDeclaration n, Object arg) {
+		if(n.getVariables() != null)
+		{
+			for (VariableDeclarator v : n.getVariables())
+			{
+				v.accept(this, arg);
+			}
+		}
 	}
 
 	@Override
@@ -185,16 +192,16 @@ public class ResolvingVariablesVisitor implements VoidVisitor<Object> {
 					+ " is not defined.");
 		}
 
-//		if (n.getId().getBeginLine() < symOfVariable.getDefinedLine()) {
-//			throw new A2SemanticsException("Variable " + symOfVariable.getName() + " on line " + n.getId().getBeginLine()
-//					+ " cannot be used before its definition.");
-//		}
-//		
-//		if (n.getId().getBeginLine() == symOfVariable.getDefinedLine()) {
-//			if(n.getBeginColumn() < symOfVariable.getDefinedColumn())
-//			throw new A2SemanticsException("Variable " + symOfVariable.getName() + " on line " + n.getId().getBeginLine() + " at column " + n.getBeginColumn()
-//					+ " cannot be used before its definition." );
-//		}
+		if (n.getId().getBeginLine() < symOfVariable.getDefinedLine()) {
+			throw new A2SemanticsException("Variable " + symOfVariable.getName() + " on line " + n.getId().getBeginLine()
+					+ " cannot be used before its definition.");
+		}
+		
+		if (n.getId().getBeginLine() == symOfVariable.getDefinedLine()) {
+			if(n.getBeginColumn() < symOfVariable.getDefinedColumn())
+			throw new A2SemanticsException("Variable " + symOfVariable.getName() + " on line " + n.getId().getBeginLine() + " at column " + n.getBeginColumn()
+					+ " cannot be used before its definition." );
+		}
 		
 		Expression expr = n.getInit();
 		String typeOfLeft = symOfVariable.getType().getName();

@@ -68,7 +68,7 @@ public class ClassSymbol extends ScopedSymbol implements Type {
 	}
 	
 	public Symbol resolveMember(String string) {
-	// if the symbol exists in the current scope, return it
+
 		Symbol s = symbols.get(string);
 		if (s != null)
 			return s;	
@@ -76,7 +76,6 @@ public class ClassSymbol extends ScopedSymbol implements Type {
 		if (superclass != null)
 			return superclass.resolveMember(string);
 
-		// otherwise it doesn't exist
 		return null;
 	}
 }

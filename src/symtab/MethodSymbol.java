@@ -40,13 +40,7 @@ public class MethodSymbol extends ScopedSymbol {
 	
 	public Symbol resolveMember(String string) {
 		Symbol s = null;
-	// if the symbol exists in the current scope, return it
-		
-//		s = symbols.get(string);
-//		if (s != null)
-//			return s;
 
-		// otherwise look in the enclosing scope, if there is one
 		if ((enclosingScope != null) && (enclosingScope instanceof ClassSymbol))
 		{
 			s = ((ClassSymbol)enclosingScope).resolveMember(string);
@@ -54,7 +48,6 @@ public class MethodSymbol extends ScopedSymbol {
 				return s;
 		}
 
-		// otherwise it doesn't exist
 		return null;
 	}
 

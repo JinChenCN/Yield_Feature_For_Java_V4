@@ -1,14 +1,18 @@
 public class Test1 {
 
-    int a;
+    int a = 0;
 
     public void setA() {
-        this.a = 0;
+        this.a = 3;
         SubTest t = new SubTest();
     }
 
 
     class SuperCla {
+
+        void test() {
+        }
+
 
         int c = 0;
     }
