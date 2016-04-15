@@ -413,7 +413,7 @@ public final class JavaParser implements JavaParserConstants {
    ClassOrInterfaceType cit;
     jj_consume_token(EXTENDS);
     cit = ClassOrInterfaceType();
-    ret.add(cit);
+                                            ret.add(cit);
     label_5:
     while (true) {
       switch (jj_nt.kind) {
@@ -426,7 +426,7 @@ public final class JavaParser implements JavaParserConstants {
       }
       jj_consume_token(COMMA);
       cit = ClassOrInterfaceType();
-      ret.add(cit); extendsMoreThanOne = true;
+                                        ret.add(cit); extendsMoreThanOne = true;
     }
       if (extendsMoreThanOne && !isInterface)
          {if (true) throw new ParseException(token, "A class cannot extend more than one other class");}
@@ -439,7 +439,7 @@ public final class JavaParser implements JavaParserConstants {
    ClassOrInterfaceType cit;
     jj_consume_token(IMPLEMENTS);
     cit = ClassOrInterfaceType();
-    ret.add(cit);
+                                               ret.add(cit);
     label_6:
     while (true) {
       switch (jj_nt.kind) {
@@ -452,7 +452,7 @@ public final class JavaParser implements JavaParserConstants {
       }
       jj_consume_token(COMMA);
       cit = ClassOrInterfaceType();
-      ret.add(cit);
+                                        ret.add(cit);
     }
       if (isInterface)
          {if (true) throw new ParseException(token, "An interface cannot implement other interfaces");}
@@ -472,7 +472,7 @@ public final class JavaParser implements JavaParserConstants {
     jj_consume_token(ENUM);
           line=token.beginLine; column=token.beginColumn;
     jj_consume_token(IDENTIFIER);
-    name = token.image;
+                                                                          name = token.image;
     switch (jj_nt.kind) {
     case IMPLEMENTS:
       impList = ImplementsList(false);
@@ -487,7 +487,7 @@ public final class JavaParser implements JavaParserConstants {
     case AT:
           entries = new LinkedList();
       entry = EnumConstantDeclaration();
-      entries.add(entry);
+                                            entries.add(entry);
       label_7:
       while (true) {
         if (jj_2_3(2)) {
@@ -497,7 +497,7 @@ public final class JavaParser implements JavaParserConstants {
         }
         jj_consume_token(COMMA);
         entry = EnumConstantDeclaration();
-        entries.add(entry);
+                                                                                                                         entries.add(entry);
       }
       break;
     default:
@@ -553,7 +553,7 @@ public final class JavaParser implements JavaParserConstants {
           break label_8;
         }
         member = ClassOrInterfaceBodyDeclaration(false);
-        members = add(members, member);
+                                                                          members = add(members, member);
       }
       break;
     default:

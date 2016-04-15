@@ -39,7 +39,9 @@ public class A2MainRunner {
 		} catch (ParseException e) {
 			System.err.println("Sample file should not have any errors! ");
 		} catch (A2SemanticsException e) {
-			System.err.println("Sample file should not have any errors! ");
+			//System.err.println("Sample file should not have any errors! ");
+			System.err.println("Sample file Parser exception... "+e.getMessage());
+			e.printStackTrace();
 		}  catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

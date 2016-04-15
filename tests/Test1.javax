@@ -1,30 +1,24 @@
-public class Test1 {
-	int a = 0;
-	int b = 0;
-	String s = "";
-			
-	public void setA() {
-		//int d = this.s;
+public class StudentSample {
 
-		//this.a = d;
-		SubTest t = new SubTest();
-					String d = t.b;
-		//t.b = "";
+	public static void main(String[] args){ 
+		String b = "test";
+		sampleMethod(b){ 
+			//The yield block 
+			for(int j = 0; j < 20; j++) { 
+				System.out.println(b);
+			}
+		}; 
+		
+		sampleMethod(b){ 
+		System.out.println("second call.");
+		};
+		
+	} 
+
+ 	public static void sampleMethod(String a) {
+		System.out.println("Execution started");
+		yield;
+		System.out.println("Execution ended"); 
 	}
-	
-	class SuperCla {
-		void test() {
-			int d = b;
-		}
-		int c = 0;
-	}
-	
-	class SubTest extends SuperCla{
-		int b = 0;
-		void reset() {
-		this.c = 1;
-		}
-	}
-	
-	//String b = "";
+
 }

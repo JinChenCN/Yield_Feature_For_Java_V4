@@ -117,6 +117,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * @author Julio Vilmar Gesser
@@ -390,10 +391,22 @@ public final class DumpVisitor implements VoidVisitor<Object> {
         printer.printLn(" {");
         printer.indent();
         if (n.getMembers() != null) {
-            printMembers(n.getMembers(), arg);
+        	CopyOnWriteArrayList<BodyDeclaration> memersArray = new CopyOnWriteArrayList<BodyDeclaration>(n.getMembers());
+        	deleteYieldMethods(memersArray, n);
+        	CopyOnWriteArrayList<BodyDeclaration> newMemersArray = new CopyOnWriteArrayList<BodyDeclaration>(n.getMembers());
+            printMembers(newMemersArray, arg);
         }
         printer.unindent();
         printer.print("}");
+    }
+    
+    private void deleteYieldMethods(CopyOnWriteArrayList<BodyDeclaration> array, ClassOrInterfaceDeclaration n) {
+    	for(BodyDeclaration b : array)
+    		if(b instanceof MethodDeclaration) {
+    			if (((MethodDeclaration) b).getName().contains("Yield")) {
+    				n.deleteMember(b);
+    			}
+    		}
     }
 
     public void visit(EmptyTypeDeclaration n, Object arg) {
@@ -1117,16 +1130,6 @@ public final class DumpVisitor implements VoidVisitor<Object> {
 
     public void visit(BreakStmt n, Object arg) {
         printer.print("break");
-        if (n.getId() != null) {
-            printer.print(" ");
-            if (expectParameters != null)
-        	{
-        		String newString = replaceParams(actualParameters, expectParameters, n.getId());
-        		printer.print(newString);
-        	}else {
-                printer.print(n.getId());
-        	}
-        }
         printer.print(";");
     }
 

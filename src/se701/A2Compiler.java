@@ -14,6 +14,7 @@ import japa.parser.ast.visitor.CreateScopesVisitor;
 import japa.parser.ast.visitor.DefineTypesVisitor;
 import japa.parser.ast.visitor.DefineVariablesVisitor;
 import japa.parser.ast.visitor.DumpVisitor;
+import japa.parser.ast.visitor.MultipleYieldVisitor;
 import japa.parser.ast.visitor.ScanYieldVisitor;
 
 public class A2Compiler {
@@ -30,6 +31,9 @@ public class A2Compiler {
 		// scan and store all yield blocks into YieldStore class
 		ScanYieldVisitor scanYieldVisitor = new ScanYieldVisitor();
 		ast.accept(scanYieldVisitor, null);
+		
+		MultipleYieldVisitor multipleYieldVisitor = new MultipleYieldVisitor();
+		ast.accept(multipleYieldVisitor, null);
 		
 		// create scopes
 		CreateScopesVisitor createScopesVisitor = new CreateScopesVisitor();

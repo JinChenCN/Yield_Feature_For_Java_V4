@@ -50,5 +50,10 @@ public class MethodSymbol extends ScopedSymbol {
 
 		return null;
 	}
+	
+	public void defineYieldPara(Symbol symbol) {
+		String name = symbol.getName();
+		symbols.put(name, symbol);
+	}
 
 }

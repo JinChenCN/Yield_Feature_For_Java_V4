@@ -199,6 +199,7 @@ public class DefineTypesVisitor implements VoidVisitor<Object> {
 			}
 
 			if (n.getMembers() != null) {
+				//addNewYieldMethods(n);
 				for (BodyDeclaration b : n.getMembers()) {
 					b.accept(this, arg);
 				}
@@ -229,6 +230,20 @@ public class DefineTypesVisitor implements VoidVisitor<Object> {
 		}
 		
 		currentScope = currentScope.getEnclosingScope();
+	}
+	
+	private void addNewYieldMethods(ClassOrInterfaceDeclaration n) {
+		for (BodyDeclaration b : n.getMembers()) {
+			if(b instanceof MethodDeclaration) {
+				List<MethodDeclaration> yieldMethods = YieldStore.getYieldMethods(((MethodDeclaration) b).getName());
+				if (yieldMethods != null)
+				{
+					for (MethodDeclaration m: yieldMethods) {
+						n.addMember(m);
+					}
+				}
+			}
+		}
 	}
 
 	@Override

@@ -1,34 +1,25 @@
-public class Test1 {
+public class StudentSample {
 
-    int a = 0;
-
-    int b = 0;
-
-    String s = "";
-
-    public void setA() {
-        SubTest t = new SubTest();
-        String d = t.b;
+    public static void main(String[] args) {
+        String b = "test";
+        sampleMethod(b);
+        sampleMethodYield1(b);
     }
 
 
-    class SuperCla {
-
-        void test() {
-            int d = b;
+    public static void sampleMethod(String a) {
+        System.out.println("Execution started");
+        for (int j = 0; j < 20; j++) {
+            System.out.println(a);
         }
 
+        System.out.println("Execution ended");
+    }
+    public static void sampleMethodYield1(String a) {
+        System.out.println("Execution started");
+        System.out.println("second call.");
 
-        int c = 0;
+        System.out.println("Execution ended");
     }
 
-    class SubTest extends SuperCla {
-
-        int b = 0;
-
-        void reset() {
-            this.c = 1;
-        }
-
-    }
 }

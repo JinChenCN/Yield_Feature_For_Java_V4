@@ -503,7 +503,11 @@ public class DefineVariablesVisitor implements VoidVisitor<Object> {
 				String name = p.getId().getName();
 				VariableSymbol symbol = new VariableSymbol(name, type);
 				symbol.setDefinedLine(p.getBeginLine());
-				currentScope.define(symbol);
+				if(n.getName().contains("Yield")){
+					((MethodSymbol)currentScope).defineYieldPara(symbol);
+				} else {
+					currentScope.define(symbol);
+				}
 			}
 		}
 

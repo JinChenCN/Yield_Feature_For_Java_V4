@@ -2161,7 +2161,7 @@ Expression PrimaryPrefix():
 	    if(yieldTimes.get(name) != null)
 	    {
 	      yieldTime = yieldTimes.get(name) + 1;
-	      newName = name + "Yield" + yieldTime;    
+	      newName = name + "Yield" + yieldTime;  
 	    }  
 	    yieldTimes.put(name, yieldTime);
 	    } ]
@@ -2186,7 +2186,7 @@ Expression PrimaryPrefix():
 	    if(yieldTimes.get(name) != null)
 	    {
 	      yieldTime = yieldTimes.get(name) + 1;
-	      newName = name + "Yield" + yieldTime;    
+	      newName = name + "Yield" + yieldTime;	      	    
 	    }  
 	    yieldTimes.put(name, yieldTime);
 	    } ]
@@ -2245,7 +2245,7 @@ Expression PrimarySuffixWithoutSuper(Expression scope):
 	    if(yieldTimes.get(name) != null)
 	    {
 	      yieldTime = yieldTimes.get(name) + 1;
-	      newName = name + "Yield" + yieldTime;    
+	      newName = name + "Yield" + yieldTime;   
 	    } 
 	    yieldTimes.put(name, yieldTime);
 	    }  ]

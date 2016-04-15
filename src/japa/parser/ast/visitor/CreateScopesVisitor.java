@@ -92,6 +92,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import se701.A2SemanticsException;
 import symtab.ClassSymbol;
@@ -201,13 +202,39 @@ public class CreateScopesVisitor implements VoidVisitor<Object> {
 			n.setEnclosingScope(currentScope);
 
 			if (n.getMembers() != null) {
-				for (BodyDeclaration b : n.getMembers()) {
+				CopyOnWriteArrayList<BodyDeclaration> memersArray = new CopyOnWriteArrayList<BodyDeclaration>(n.getMembers());
+				addNewYieldMethods(memersArray, n);	
+				CopyOnWriteArrayList<BodyDeclaration> newMemersArray = new CopyOnWriteArrayList<BodyDeclaration>(n.getMembers());
+				for (BodyDeclaration b : newMemersArray) {
 					b.accept(this, arg);
 				}
 			}
 		}
 
 		currentScope = currentScope.getEnclosingScope();
+	}
+	
+	private synchronized void addNewYieldMethods(CopyOnWriteArrayList<BodyDeclaration> list, ClassOrInterfaceDeclaration n) {
+		for (BodyDeclaration b : list) {
+			if(b instanceof MethodDeclaration) {
+				String methodName = ((MethodDeclaration) b).getName();
+//				if(methodName.contains("Yield")){
+//					String[] parts = methodName.split("Yield");					
+//					methodName = parts[0];
+//				}
+				List<MethodDeclaration> yieldMethods = YieldStore.getYieldMethods(methodName);
+				if (yieldMethods != null)
+				{
+					for (MethodDeclaration newMethod: yieldMethods) {
+						MethodDeclaration m = new MethodDeclaration(newMethod.getBeginLine(), newMethod.getBeginColumn(), newMethod.getJavaDoc(), 
+								newMethod.getModifiers(), newMethod.getAnnotations(), newMethod.getTypeParameters(), 
+								newMethod.getType(), newMethod.getName(), newMethod.getParameters(), newMethod.getArrayCount(), 
+								newMethod.getThrows(), newMethod.getBody());
+						n.addMember(m);
+					}
+				}
+			}
+		}
 	}
 
 	@Override

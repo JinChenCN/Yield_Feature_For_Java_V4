@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 Júlio Vilmar Gesser.
+ * Copyright (C) 2007 Jï¿½lio Vilmar Gesser.
  * 
  * This file is part of Java 1.5 parser and Abstract Syntax Tree.
  *
@@ -22,6 +22,7 @@
 package japa.parser.ast.body;
 
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * @author Julio Vilmar Gesser
@@ -50,7 +51,15 @@ public abstract class TypeDeclaration extends BodyDeclaration {
     }
 
     public List<BodyDeclaration> getMembers() {
-        return members;
+        return new CopyOnWriteArrayList<BodyDeclaration> (members);
+    }
+    
+    public void addMember(BodyDeclaration b) {
+    	members.add(b);
+    }
+    
+    public void deleteMember(BodyDeclaration b) {
+    	members.remove(b);
     }
 
 }

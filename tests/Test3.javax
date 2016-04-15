@@ -9,6 +9,14 @@ public class StudentSample {
 				System.out.println(j);
 			}
 		}; 
+		
+		sampleMethod(){ 
+		System.out.println("second call.");
+		};
+		
+		sampleMethod(){ 
+		System.out.println("third call.");
+		};
 	} 
 
  	public static void sampleMethod() {
