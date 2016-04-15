@@ -8,4 +8,14 @@ public class Test2 {
         int b = 456;
     }
 
+
+    class Dog {
+
+        public Dog() {
+        }
+
+        ;
+    }
+
+    ;
 }

@@ -32,10 +32,11 @@ public class A2Compiler {
 		ScanYieldVisitor scanYieldVisitor = new ScanYieldVisitor();
 		ast.accept(scanYieldVisitor, null);
 		
+		// add new methods as members of enclosing classes to support multiple yield blocks
 		MultipleYieldVisitor multipleYieldVisitor = new MultipleYieldVisitor();
 		ast.accept(multipleYieldVisitor, null);
 		
-		// create scopes and define types
+		// create scopes and define types and methods
 		CreateScopesVisitor createScopesVisitor = new CreateScopesVisitor();
 		ast.accept(createScopesVisitor, null);
 		
@@ -47,15 +48,15 @@ public class A2Compiler {
 		DefineVariablesVisitor defineVariablesVisitor = new DefineVariablesVisitor();
 		ast.accept(defineVariablesVisitor, null);
 
-		// resolve variables
+		// resolve variables and check errors
 		ResolvingVariablesVisitor resolvingVariablesVisitor = new ResolvingVariablesVisitor();
 		ast.accept(resolvingVariablesVisitor, null);
 
-		// resolve methods
+		// resolve methods and check errors
 		ResolvingMethodsVisitor resolvingMethodsVisitor = new ResolvingMethodsVisitor();
 		ast.accept(resolvingMethodsVisitor, null);
 		
-		// perform visit N 
+		// source to source printer
 		DumpVisitor printVisitor = new DumpVisitor();
 		ast.accept(printVisitor, null);
 		
