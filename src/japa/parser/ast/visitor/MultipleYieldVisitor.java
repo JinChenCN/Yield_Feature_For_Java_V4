@@ -423,7 +423,6 @@ public final class MultipleYieldVisitor implements VoidVisitor<Object> {
         visitTypeArgs(n.getTypeArgs(), arg);      
         
         if (n.getArgs() != null) {
-       	    YieldStore.putYieldParams(n.getName(), n.getArgs());
             for (Iterator<Expression> i = n.getArgs().iterator(); i.hasNext();) {
                 Expression e = i.next();
                 e.accept(this, arg);
