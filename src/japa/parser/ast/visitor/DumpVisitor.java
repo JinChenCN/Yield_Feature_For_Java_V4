@@ -289,7 +289,7 @@ public final class DumpVisitor implements VoidVisitor<Object> {
     }
 
     public void visit(NameExpr n, Object arg) {
-    	if (expectParameters != null)
+    	if (expectParameters != null && actualParameters!= null)
     	{
     		String newString = replaceParams(actualParameters, expectParameters, n.getName());
     		printer.print(newString);
@@ -301,7 +301,7 @@ public final class DumpVisitor implements VoidVisitor<Object> {
     public void visit(QualifiedNameExpr n, Object arg) {
         n.getQualifier().accept(this, arg);
         printer.print(".");
-        if (expectParameters != null)
+        if (expectParameters != null  && actualParameters!= null)
     	{
     		String newString = replaceParams(actualParameters, expectParameters, n.getName());
     		printer.print(newString);
@@ -1073,7 +1073,7 @@ public final class DumpVisitor implements VoidVisitor<Object> {
     }
 
     public void visit(LabeledStmt n, Object arg) {
-    	if (expectParameters != null)
+    	if (expectParameters != null  && actualParameters!= null)
     	{
     		String newString = replaceParams(actualParameters, expectParameters, n.getLabel());
     		printer.print(newString);
@@ -1150,7 +1150,7 @@ public final class DumpVisitor implements VoidVisitor<Object> {
         printModifiers(n.getModifiers());
 
         printer.print("enum ");
-        if (expectParameters != null)
+        if (expectParameters != null  && actualParameters!= null)
     	{
     		String newString = replaceParams(actualParameters, expectParameters, n.getName());
     		printer.print(newString);
@@ -1197,7 +1197,7 @@ public final class DumpVisitor implements VoidVisitor<Object> {
             n.getJavaDoc().accept(this, arg);
         }
         printMemberAnnotations(n.getAnnotations(), arg);
-        if (expectParameters != null)
+        if (expectParameters != null  && actualParameters!= null)
     	{
     		String newString = replaceParams(actualParameters, expectParameters, n.getName());
     		printer.print(newString);
@@ -1265,7 +1265,7 @@ public final class DumpVisitor implements VoidVisitor<Object> {
         printer.print("continue");
         if (n.getId() != null) {
             printer.print(" ");
-            if (expectParameters != null)
+            if (expectParameters != null  && actualParameters!= null)
         	{
         		String newString = replaceParams(actualParameters, expectParameters, n.getId());
         		printer.print(newString);

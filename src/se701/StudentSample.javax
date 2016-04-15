@@ -3,24 +3,16 @@ package se701;
 public class StudentSample {
 
 	public static void main(String[] args){ 
-	    String b = "test";
-		sampleMethod(b){ 
+		sampleMethod(){ 
 			//The yield block 
 			for(int i = 0; i < 20; i++) { 
-				System.out.println(b);
+				System.out.println(i);
 			}
 		}; 
 		
-		sampleMethod(b){ 
-		System.out.println("second call.");
-		}; 
-		
-		sampleMethod(b){ 
-		System.out.println("third call.");
-		}; 
 	} 
 
- 	public static void sampleMethod(String a) {
+ 	public static void sampleMethod() {
 		System.out.println("Execution started");
 		yield;
 		System.out.println("Execution ended"); 

@@ -2,20 +2,20 @@ public class StudentSample {
 
 	public static void main(String[] args){ 
 		String b = "test";
-		sampleMethod(b){ 
+		myMethod(b){ 
 			//The yield block 
 			for(int j = 0; j < 20; j++) { 
 				System.out.println(b);
 			}
 		}; 
 		
-		sampleMethod(b){ 
+		myMethod(b){ 
 		System.out.println("second call.");
 		};
 		
 	} 
 
- 	public static void sampleMethod(String a) {
+ 	public static void myMethod(String a) {
 		System.out.println("Execution started");
 		yield;
 		System.out.println("Execution ended"); 
