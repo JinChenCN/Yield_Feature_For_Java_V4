@@ -1,24 +1,9 @@
-public class StudentSample {
-
-	public static void main(String[] args){ 
-		String b = "test";
-		myMethod(b){ 
-			//The yield block 
-			for(int j = 0; j < 20; j++) { 
-				System.out.println(b);
-			}
-		}; 
+public class Test1 {
+	int a;
+	
+	public void foo(boolean x) {
+		a = false;  // ERROR: incompatible types
 		
-		myMethod(b){ 
-		System.out.println("second call.");
-		};
-		
-	} 
-
- 	public static void myMethod(String a) {
-		System.out.println("Execution started");
-		yield;
-		System.out.println("Execution ended"); 
+		//break;
 	}
-
 }

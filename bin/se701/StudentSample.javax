@@ -9,7 +9,6 @@ public class StudentSample {
 				System.out.println(i);
 			}
 		}; 
-		
 	} 
 
  	public static void sampleMethod() {
