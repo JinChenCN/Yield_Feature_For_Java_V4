@@ -11,7 +11,7 @@ import japa.parser.ast.CompilationUnit;
 import japa.parser.ast.visitor.ResolvingMethodsVisitor;
 import japa.parser.ast.visitor.ResolvingVariablesVisitor;
 import japa.parser.ast.visitor.CreateScopesVisitor;
-import japa.parser.ast.visitor.DefineTypesVisitor;
+import japa.parser.ast.visitor.HierarchyVisitor;
 import japa.parser.ast.visitor.DefineVariablesVisitor;
 import japa.parser.ast.visitor.DumpVisitor;
 import japa.parser.ast.visitor.MultipleYieldVisitor;
@@ -35,12 +35,12 @@ public class A2Compiler {
 		MultipleYieldVisitor multipleYieldVisitor = new MultipleYieldVisitor();
 		ast.accept(multipleYieldVisitor, null);
 		
-		// create scopes
+		// create scopes and define types
 		CreateScopesVisitor createScopesVisitor = new CreateScopesVisitor();
 		ast.accept(createScopesVisitor, null);
 		
-		// define types
-		DefineTypesVisitor defineTypesVisitor = new DefineTypesVisitor();
+		// define hierarchy of types
+		HierarchyVisitor defineTypesVisitor = new HierarchyVisitor();
 		ast.accept(defineTypesVisitor, null);
 
 		// define variables

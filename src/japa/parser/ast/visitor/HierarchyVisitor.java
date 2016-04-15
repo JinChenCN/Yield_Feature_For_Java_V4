@@ -98,7 +98,7 @@ import symtab.Scope;
 import symtab.Symbol;
 
 
-public class DefineTypesVisitor implements VoidVisitor<Object> {
+public class HierarchyVisitor implements VoidVisitor<Object> {
 
 	private Scope currentScope;
 
